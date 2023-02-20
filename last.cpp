@@ -48,7 +48,7 @@ void countZeroes(int matrix[][SIZEMATRIX]) {
 }
 
 void countDownTriangle(int matrix[][SIZEMATRIX]) {
-	cout << "в)Cумма элементов матрицы под нижней диагональю: ";
+	cout << "в)Cумма элементов матрицы под нижней диагональю:  ";
 	int sum = 0;
 	for (int i = 0; i < SIZEMATRIX; i++) {
 		for (int j = 0; j < SIZEMATRIX; j++) {
