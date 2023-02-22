@@ -6,28 +6,27 @@ const int SIZEMATRIX = 17;
 
 using namespace std;
 
-void createMatrix(int[][SIZEMATRIX]);
-void showMatrix(int[][SIZEMATRIX]);
-void findQuantityInAllMatrix(int[][SIZEMATRIX]);
-int findQuantityInStr(int[], int);
-void countZeroes(int[][SIZEMATRIX]);
-void countDownTriangle(int[][SIZEMATRIX]);
-const int randomNumberInRange(int);
-void menu(int[][SIZEMATRIX]);
+void CreateMatrix(int[][SIZEMATRIX]);
+void ShowMatrix(int[][SIZEMATRIX]);
+void FindQuantityInAllMatrix(int[][SIZEMATRIX]);
+int FindQuantityInRow(int[], int);
+void CountZeroesRows(int[][SIZEMATRIX]);
+void CountDownTriangle(int[][SIZEMATRIX]);
+const int RandomNumberInRange(int, int);
+void Menu(int[][SIZEMATRIX]);
 
 int main()
 {
-	system("chcp 1251");
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	int matrix[SIZEMATRIX][SIZEMATRIX];
-	createMatrix(matrix);
-	menu(matrix);
+	CreateMatrix(matrix);
+	Menu(matrix);
 	return 0;
 }
 
-void countZeroes(int matrix[][SIZEMATRIX]) {
-	cout << "б) Количество ненулевых строк:";
+void CountZeroesRows(int matrix[][SIZEMATRIX]) {
+	cout << "�) ���������� ��������� �����:";
 	bool flag = true;
 	int counter = 0;
 	for (int i = 0; i < SIZEMATRIX; i++) {
@@ -47,8 +46,8 @@ void countZeroes(int matrix[][SIZEMATRIX]) {
 	cout << counter;
 }
 
-void countDownTriangle(int matrix[][SIZEMATRIX]) {
-	cout << "в)Cумма элементов матрицы под нижней диагональю:  ";
+void CountDownTriangle(int matrix[][SIZEMATRIX]) {
+	cout << "�)C���� ��������� ������� ��� ������ ����������: ";
 	int sum = 0;
 	for (int i = 0; i < SIZEMATRIX; i++) {
 		for (int j = 0; j < SIZEMATRIX; j++) {
@@ -60,12 +59,12 @@ void countDownTriangle(int matrix[][SIZEMATRIX]) {
 	cout << sum;
 }
 
-int findQuantityInStr(int str[], int value)
+int FindQuantityInRow(int array[], int minValue)
 {
 	int k = 0;
 	for (int i = 0; i < SIZEMATRIX; i++)
 	{
-		if (str[i] < value)
+		if (array[i] < minValue)
 		{
 			k++;
 		}
@@ -73,21 +72,21 @@ int findQuantityInStr(int str[], int value)
 	return k;
 }
 
-void findQuantityInAllMatrix(int matrix[][SIZEMATRIX])
+void FindQuantityInAllMatrix(int matrix[][SIZEMATRIX])
 {
-	cout << "а)";
-	cout << "Задайте значение: ";
-	int value = 0;
-	cin >> value;
+	cout << "�)";
+	cout << "������� ��������: ";
+	int minValue = 0;
+	cin >> minValue;
 	for (int i = 0; i < SIZEMATRIX; i++)
 	{
-		cout << "Количество элементов, меньших заданного значения в строке " << i + 1 << " равно: " << findQuantityInStr(matrix[i], value) << endl;
+		cout << "���������� ���������, ������� ��������� �������� � ������ " << i + 1 << " �����: " << FindQuantityInRow(matrix[i], minValue) << endl;
 	}
 }
 
-void showMatrix(int matrix[][SIZEMATRIX])
+void ShowMatrix(int matrix[][SIZEMATRIX])
 {
-	cout << "Созданная матрица:\n";
+	cout << "��������� �������:\n";
 	for (int i = 0; i < SIZEMATRIX; i++)
 	{
 		for (int j = 0; j < SIZEMATRIX; j++)
@@ -99,66 +98,66 @@ void showMatrix(int matrix[][SIZEMATRIX])
 	cout << endl;
 }
 
-void createMatrix(int matrix[][SIZEMATRIX])
+void CreateMatrix(int matrix[][SIZEMATRIX])
 {
 	for (int i = 0; i < SIZEMATRIX; i++)
 	{
 		for (int j = 0; j < SIZEMATRIX; j++)
 		{
-			matrix[i][j] = randomNumberInRange(12);
+			matrix[i][j] = RandomNumberInRange(-10, 16);
 		}
 	}
 }
 
-const int randomNumberInRange(int zone)
+const int RandomNumberInRange(int lowerEdge, int upperEdge)
 {
-	return rand() % (2 * zone) - zone;
+	return rand() % (upperEdge + 1) - rand() % (lowerEdge + 1);
 }
 
-void menu(int matrix[][SIZEMATRIX]) {
-	int menu_num = 100;
-	createMatrix(matrix);
-	while (menu_num != 0) {
+void Menu(int matrix[][SIZEMATRIX]) {
+	int menuNum = 100;
+	CreateMatrix(matrix);
+	while (menuNum != 0) {
 		system("cls");
-		cout << "1 - Вывести матрицу\n";
-		cout << "2 - а)Количество элементов, меньших заданного значения\n";
-		cout << "3 - б)Количество ненулевых строк\n";
-		cout << "4 - в)Cумма элементов матрицы под нижней диагональю\n";
-		cout << "0 - Выход из программы\n";
-        cout << "Выберите пункт: ";
-		cin >> menu_num;
-        cout <<'\n';
-		switch (menu_num)
+		cout << "1 - ������� �������\n";
+		cout << "2 - �)���������� ���������, ������� ��������� ��������\n";
+		cout << "3 - �)���������� ��������� �����\n";
+		cout << "4 - �)C���� ��������� ������� ��� ������ ����������\n";
+		cout << "0 - ����� �� ���������\n";
+		cout << "�������� �����: ";
+		cin >> menuNum;
+		system("cls");
+		switch (menuNum)
 		{
 		case 1:
-			showMatrix(matrix);
+			ShowMatrix(matrix);
 			cout << '\n';
 			system("pause");
 			break;
 		case 2:
-			findQuantityInAllMatrix(matrix);
-            cout << '\n';
+			FindQuantityInAllMatrix(matrix);
+			cout << '\n';
 			system("pause");
 			break;
 		case 3:
-            countZeroes(matrix);
+			CountZeroesRows(matrix);
 			cout << '\n';
 			system("pause");
-            break;
+			break;
 		case 4:
-			countDownTriangle(matrix);
+			CountDownTriangle(matrix);
 			cout << '\n';
 			system("pause");
-            break;
+			break;
 		case 0:
-			cout << "Досвидания\n";
+			cout << "�� ��������.\n";
 			system("pause");
 			break;
 		default:
-			cout << "Введите число из списка";
-            cout << '\n';
+			cout << "������� ����� �� ������";
+			cout << '\n';
 			system("pause");
 			break;
-		} 
+		}
 	}
 }
